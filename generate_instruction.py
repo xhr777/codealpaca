@@ -53,17 +53,13 @@ def post_process_gpt3_response(num_prompt_instructions, response):
 #             continue
         idx += num_prompt_instructions + 1
         splitted_data = re.split(f"{idx}\.\s+(Instruction|Input|Output):", inst)
-        inst = splitted_data[2].strip()
-        input = splitted_data[4].strip()
-        input = "" if input.lower() == "<noinput>" else input
-        output = splitted_data[6].strip()
-#         if len(splitted_data) != 7:
-#             continue
-#         else:
-#             inst = splitted_data[2].strip()
-#             input = splitted_data[4].strip()
-#             input = "" if input.lower() == "<noinput>" else input
-#             output = splitted_data[6].strip()
+        if len(splitted_data) != 7:
+            continue
+        else:
+            inst = splitted_data[2].strip()
+            input = splitted_data[4].strip()
+            input = "" if input.lower() == "<noinput>" else input
+            output = splitted_data[6].strip()
         # filter out too short or too long instructions
 #         if len(inst.split()) <= 3 or len(inst.split()) > 150:
 #             continue
