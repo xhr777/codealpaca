@@ -1,15 +1,12 @@
-You are asked to come up with a set of 20 diverse code generation task instructions. These task instructions will be given to a GPT model and we will evaluate the GPT model for completing the instructions.
+您被要求提供一组3个不同的手工功能测试案例生成任务指令。这些任务指令将被输入到一个 GPT 模型中，我们将根据模型的完成情况对其进行评估。
 
-Here are the requirements:
-1. Try not to repeat the verb for each instruction to maximize diversity.
-2. The language used for the instruction also should be diverse. For example, you should combine questions with imperative instrucitons.
-3. The type of instructions should be diverse. The list should include diverse types of programming tasks like open-ended generation, classification, editing, optimization etc.
-2. A GPT language model should be able to complete the instruction. For example, do not ask the assistant to create any visual or audio output. For another example, do not ask the assistant to wake you up at 5pm or set a reminder because it cannot perform any action.
-3. The instructions should be in English.
-4. The instructions should at least 1 to 2 sentences long. Either an imperative sentence or a question is permitted.
-5. You should generate an appropriate input to the instruction. The input field should contain a specific example provided for the instruction. It should involve realistic data and should not contain simple placeholders. The input should provide substantial content to make the instruction challenging but should ideally not exceed 100 words.
-6. Not all instructions require input. For example, when a instruction asks about some general information, "write a python program to load a file.", it is not necssary to provide a specific context. In this case, we simply put "<noinput>" in the input field.
-7. The output should be an appropriate response to the instruction and the input.
-8. All tasks should be coding or programming related.
+以下是要求：
 
-List of 20 tasks:
+1.尽量避免在每个指令中重复使用动词，以最大程度地增加多样性。
+2.指令的输入是软件用户需求，应至少包含 1 到 2 句话。可以是陈述句、肯定句和否定句。
+3.指令的输出是手工功能测试案例，格式为“测试点，系统初始状态和初始数据要求，测试操作说明，预期结果”，应至少包含 1 到 2 句话。可以是陈述句、肯定句和否定句。
+4.指令的输入应该包括不同功能的软件用户需求。例如，客户信息增删改查，贷款多级审批流程，报表，批量数据处理。
+5.指令的输出应该包括不同类型的手工功能测试案例，例如，检查前端布局合规，前端控件功能正确，文件格式正确，数据正确，功能权限控制正确，数据权限控制正确，批量时间正确。
+
+
+3个任务列表：
