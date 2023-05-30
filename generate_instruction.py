@@ -88,7 +88,7 @@ def post_process_gpt3_response(num_prompt_instructions, response):
 #             "flowchart",
 #             "diagram",
 #         ]
-        blacklist += []
+        blacklist = []
 #         if any(find_word_in_string(word, inst) for word in blacklist):
 #             continue
         # We found that the model tends to add "write a program" to some existing instructions, which lead to a lot of such instructions.
