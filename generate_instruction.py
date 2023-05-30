@@ -49,56 +49,60 @@ def post_process_gpt3_response(num_prompt_instructions, response):
     instructions = []
     for idx, inst in enumerate(raw_instructions):
         # if the decoding stops due to length, the last example is likely truncated so we discard it
-        if idx == len(raw_instructions) - 1 and response["finish_reason"] == "length":
-            continue
+#         if idx == len(raw_instructions) - 1 and response["finish_reason"] == "length":
+#             continue
         idx += num_prompt_instructions + 1
         splitted_data = re.split(f"{idx}\.\s+(Instruction|Input|Output):", inst)
-        if len(splitted_data) != 7:
-            continue
-        else:
-            inst = splitted_data[2].strip()
-            input = splitted_data[4].strip()
-            input = "" if input.lower() == "<noinput>" else input
-            output = splitted_data[6].strip()
+        inst = splitted_data[2].strip()
+        input = splitted_data[4].strip()
+        input = "" if input.lower() == "<noinput>" else input
+        output = splitted_data[6].strip()
+#         if len(splitted_data) != 7:
+#             continue
+#         else:
+#             inst = splitted_data[2].strip()
+#             input = splitted_data[4].strip()
+#             input = "" if input.lower() == "<noinput>" else input
+#             output = splitted_data[6].strip()
         # filter out too short or too long instructions
-        if len(inst.split()) <= 3 or len(inst.split()) > 150:
-            continue
+#         if len(inst.split()) <= 3 or len(inst.split()) > 150:
+#             continue
         # filter based on keywords that are not suitable for language models.
-        blacklist = [
-            "image",
-            "images",
-            "graph",
-            "graphs",
-            "picture",
-            "pictures",
-            "file",
-            "files",
-            "map",
-            "maps",
-            "draw",
-            "plot",
-            "go to",
-            "video",
-            "audio",
-            "music",
-            "flowchart",
-            "diagram",
-        ]
+#         blacklist = [
+#             "image",
+#             "images",
+#             "graph",
+#             "graphs",
+#             "picture",
+#             "pictures",
+#             "file",
+#             "files",
+#             "map",
+#             "maps",
+#             "draw",
+#             "plot",
+#             "go to",
+#             "video",
+#             "audio",
+#             "music",
+#             "flowchart",
+#             "diagram",
+#         ]
         blacklist += []
-        if any(find_word_in_string(word, inst) for word in blacklist):
-            continue
+#         if any(find_word_in_string(word, inst) for word in blacklist):
+#             continue
         # We found that the model tends to add "write a program" to some existing instructions, which lead to a lot of such instructions.
         # And it's a bit comfusing whether the model need to write a program or directly output the result.
         # Here we filter them out.
         # Note this is not a comprehensive filtering for all programming instructions.
-        if inst.startswith("Write a program"):
-            continue
-        # filter those starting with punctuation
-        if inst[0] in string.punctuation:
-            continue
-        # filter those starting with non-english character
-        if not inst[0].isascii():
-            continue
+#         if inst.startswith("Write a program"):
+#             continue
+#         # filter those starting with punctuation
+#         if inst[0] in string.punctuation:
+#             continue
+#         # filter those starting with non-english character
+#         if not inst[0].isascii():
+#             continue
         instructions.append({"instruction": inst, "input": input, "output": output})
     return instructions
 
